@@ -160,7 +160,11 @@ limitations under the License.
       {
         "1001": {
           "color": "black",
-          "image": "./shirts/black.jpg"
+          "image": "./shirts/black.jpg",
+          "sizes": {
+            "XS": 8.99,
+            "S": 9.99
+          }
         },
         "1002": {
           "color": "blue",
@@ -271,13 +275,18 @@ limitations under the License.
               <td [class]="shirts[selected.sku].sizes['S'] ? '' : 'unavailable'">
                 <div option="S">S</div>
               </td>
-              <td [class]="shirts[selected.sku].sizes['M'] ? '' : 'unavailable'">
+              <!-- Add the 'unavailable' class to the next three <td> elements
+                  to be consistent with the available sizes of the default SKU. -->
+              <td class="unavailable" 
+                  [class]="shirts[selected.sku].sizes['M'] ? '' : 'unavailable'">
                 <div option="M">M</div>
               </td>
-              <td [class]="shirts[selected.sku].sizes['L'] ? '' : 'unavailable'">
+              <td class="unavailable" 
+                  [class]="shirts[selected.sku].sizes['L'] ? '' : 'unavailable'">
                 <div option="L">L</div>
               </td>
-              <td [class]="shirts[selected.sku].sizes['XL'] ? '' : 'unavailable'">
+              <td class="unavailable" 
+                  [class]="shirts[selected.sku].sizes['XL'] ? '' : 'unavailable'">
                 <div option="XL">XL</div>
               </td>
             </tr>
