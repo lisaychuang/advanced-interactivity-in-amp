@@ -257,8 +257,9 @@ limitations under the License.
 
       <div class="options price">
         <h6>PRICE :
-          <!-- TODO: "Variable shirt prices" -->
-          $9.99
+          <!-- Display the price of the selected shirt in the selected size if available.
+       Otherwise, display the placeholder text 'Not available'. -->
+  <span [text]="shirts[selected.sku].sizes[selectedSize] || 'Not available'">---</span>
         </h6>
       </div>
 
@@ -266,7 +267,11 @@ limitations under the License.
         <h6>SIZE :</h6>
 
         <!-- UPDATE CLASS NAME BASED ON SHIRTS AVAILABILITY -->
-        <amp-selector name="size">
+        <!-- When an element is selected, set the `selectedSize` variable to the
+          value of the "option" attribute of the selected element.  -->
+        <amp-selector name="size"
+          on="select:AMP.setState({selectedSize: event.targetOption})">
+
           <table>
             <tr>
               <td [class]="shirts[selected.sku].sizes['XS'] ? '' : 'unavailable'">
@@ -304,9 +309,12 @@ limitations under the License.
       </div>
 
       <div class="options purchase">
-        <!-- TODO: "Conditionally enabled button" -->
-        <input type="submit" value="ADD TO CART"
-            class="mdl-button mdl-button--raised mdl-button--accent">
+        
+        <!-- Disable the "ADD TO CART" button -->
+        <input type="submit" value="ADD TO CART" disabled
+          class="mdl-button mdl-button--raised mdl-button--accent"
+            [disabled]="!selectedSize || !shirts[selected.sku].sizes[selectedSize]">
+        
       </div>
 
       <div submit-success>
